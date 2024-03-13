@@ -5,7 +5,6 @@ from PyPDF2 import PdfReader
 import locale
 import re
 import os
-import sqlite3
 
 class PDFEstatementProcessor:
     def __init__(self):
