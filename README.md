@@ -17,11 +17,11 @@ Skrip Python ini mengonversi e-statement PDF dari Bank Central Asia (BCA) menjad
 git clone https://github.com/devbernardi/Estatement-BCA-pdf-to-CSV-or-Excel
 ```
 
-## 1. Arahkan ke direktori proyek:
+2. Arahkan ke direktori proyek:
 ```bash
 cd konverter-pdf-e-statement
 ```
-## 2. Instal dependensi yang diperlukan:
+3. Instal dependensi yang diperlukan:
 ```bash
 pip install -r requirements.txt
 ```
