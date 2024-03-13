@@ -96,22 +96,21 @@ class PDFEstatementProcessor:
     def process_files_in_directory(self, directory):
         for dirpath, dirnames, filenames in os.walk(directory):
             for filename in [f for f in filenames if f.endswith(".pdf")]:
-                if 'feb' in dirpath.lower() or 'februari' in dirpath.lower():
-                    pdf_path = os.path.join(dirpath, filename).replace('./', '/content/')
-                    try:
-                        result, saldo_akhr = self.process_pdf_file(pdf_path)
-                        result.to_csv(filename.replace('.pdf', '.csv'), index=False)
+                pdf_path = os.path.join(dirpath, filename)
+                try:
+                    result, saldo_akhr = self.process_pdf_file(pdf_path)
+                    result.to_csv(filename.replace('.pdf', '.csv'), index=False)
 
-                        df_cleaned = result.dropna(subset=['saldo'])
-                        sld = df_cleaned.tail(1)
+                    df_cleaned = result.dropna(subset=['saldo'])
+                    sld = df_cleaned.tail(1)
 
-                        if float(sld['saldo'].iloc[-1].replace(',','')) == float(saldo_akhr):
-                            print(f"No Rekening: {sld['no_rek'].iloc[-1]}\tSaldo Akhir: {saldo_akhr}")
-                        else:
-                            print(f"Verification failed for file: {filename}")
-                    except Exception as e:
-                        print(e)
-                        print(f"Error processing file: {filename}")
+                    if float(sld['saldo'].iloc[-1].replace(',','')) == float(saldo_akhr):
+                        print(f"No Rekening: {sld['no_rek'].iloc[-1]}\tSaldo Akhir: {saldo_akhr}")
+                    else:
+                        print(f"Verification failed for file: {filename}")
+                except Exception as e:
+                    print(e)
+                    print(f"Error processing file: {filename}")
 
     def process_file(self, file_path):
         try:
